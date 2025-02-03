@@ -2,24 +2,45 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken"); // generate signed token
 const { expressjwt: Jwt } = require("express-jwt");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const { sendVerificationEmail } = require("./mailer");
 
 exports.signup = async (req, res) => {
   const user = new User(req.body);
 
   try {
+    // Save the user to the database
     const response = await user.save();
 
+    // Exclude sensitive data (e.g., salt, hashed_password)
     response.salt = undefined;
     response.hashed_password = undefined;
 
+    // Send verification email
+    const verificationLink = `https://yourfrontend.com/verify-email/${response._id}`;  // Update with your real verification URL
+    const subject = 'Please verify your email address';
+    const textContent = `Click the link to verify your email: ${verificationLink}`;
+
+    try {
+      // Call the function to send the email
+      await sendVerificationEmail(response.email, subject, textContent);
+      res.json({ message: 'User created, verification email sent' });
+    } catch (emailError) {
+      return res.status(500).json({
+        error: 'User created, but failed to send verification email',
+        details: emailError.message
+      });
+    }
+
+    // Respond with user info (excluding sensitive data)
     res.json({ user: response });
 
   } catch (error) {
     return res.status(400).json({
       error: errorHandler(error)
-    })
+    });
   }
 };
+
 
 exports.signin = async (req, res) => {
   const { email, password } = req.body;
