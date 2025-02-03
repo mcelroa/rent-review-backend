@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
     response.hashed_password = undefined;
 
     // Send verification email
-    const verificationLink = `https://yourfrontend.com/verify-email/${response._id}`;  // Update with your real verification URL
+    const verificationLink = `http://localhost:5173/verify-email/${response._id}`;  // Update with your real verification URL
     const subject = 'Please verify your email address';
     const textContent = `Click the link to verify your email: ${verificationLink}`;
 
@@ -30,9 +30,6 @@ exports.signup = async (req, res) => {
         details: emailError.message
       });
     }
-
-    // Respond with user info (excluding sensitive data)
-    res.json({ user: response });
 
   } catch (error) {
     return res.status(400).json({
@@ -53,6 +50,13 @@ exports.signin = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         error: "User with that email does not exist. Please signup",
+      });
+    }
+
+    // Check if the user is verified
+    if (!user.isVerified) {
+      return res.status(403).json({
+        error: "Your email is not verified. Please verify it before logging in.",
       });
     }
 

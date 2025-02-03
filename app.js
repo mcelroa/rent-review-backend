@@ -11,6 +11,7 @@ const app = express();
 const authRoutes = require("./routes/auth");
 const propertyRoutes = require("./routes/property");
 const reviewRoutes = require("./routes/review");
+const mailerRoutes = require("./routes/mailer");
 
 // Connect to MongoDB
 mongoose
@@ -27,6 +28,7 @@ const port = process.env.PORT || 5000;
 app.use("/api", authRoutes);
 app.use("/api", propertyRoutes);
 app.use("/api", reviewRoutes);
+app.use("/api", mailerRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
