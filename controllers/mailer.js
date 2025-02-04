@@ -38,26 +38,19 @@ exports.verifyEmail = async (req, res) => {
   try {
     // Find the user by ID
     const user = await User.findById(userId);
-    console.log("User fetched from DB:", user); // Log user before anything else
 
     if (!user) {
-      console.log("User not found");
       return res.status(400).json({ message: "User not found" });
     }
 
-    console.log("Before checking if verified:", user.isVerified); // Check value before if statement
-
     // Check if the user is already verified
     if (user.isVerified) {
-      console.log("User already verified, returning response.");
       return res.status(400).json({ message: "Email already verified" });
     }
 
-    console.log("User is not verified, updating now...");
     user.isVerified = true; // This should only execute if user.isVerified was false
     await user.save();
 
-    console.log("After updating:", user);
     res.json({ message: "Email verified successfully! You can now log in." });
   } catch (error) {
     console.error(error);

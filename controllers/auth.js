@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
     response.hashed_password = undefined;
 
     // Send verification email
-    const verificationLink = `http://localhost:5173/verify-email/${response._id}`;  // Update with your real verification URL
+    const verificationLink = `${process.env.FRONTEND_URI}/verify-email/${response._id}`;  // Update with your real verification URL
     const subject = 'Please verify your email address';
     const textContent = `Click the link to verify your email: ${verificationLink}`;
 
