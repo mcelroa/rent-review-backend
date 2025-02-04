@@ -1,0 +1,11 @@
+[2025-02-04T23:10:01.615Z] INFO: GET /api/properties/?search=lack - ::1
+[2025-02-04T23:29:17.208Z] INFO: POST /api/signup - ::1
+[2025-02-04T23:29:18.196Z] INFO: POST /api/signup - ::1
+[2025-02-04T23:29:45.976Z] INFO: POST /api/signup - ::1
+[2025-02-04T23:32:58.103Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:01.185Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:01.863Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:02.779Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:07.533Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:08.295Z] INFO: POST /api/signin - ::1
+[2025-02-04T23:33:45.874Z] INFO: GET /api/properties/?search=lacken - ::1
