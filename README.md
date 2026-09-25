@@ -39,7 +39,7 @@ Built with **Node.js**, **Express**, and **MongoDB** (Mongoose).
 ### Installation
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/mcelroa/rent-review-backend.git
 cd rent-review-backend
 npm install
 ```
